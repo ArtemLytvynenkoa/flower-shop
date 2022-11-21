@@ -8,17 +8,13 @@ const ROOT_PATH = path.resolve(process.cwd());
 const config = {
   resolve: {
     extensions: ['.js', '.jsx'],
-    // alias: {
-    //   containers: path.resolve(ROOT_PATH, './src/containers'),
-    //   components: path.resolve(ROOT_PATH, './src/components'),
-    //   types: path.resolve(ROOT_PATH, './src/types'),
-    //   routes: path.resolve(ROOT_PATH, './src/routes'),
-    //   fire: path.resolve(ROOT_PATH, './src/firebase'),
-    //   utils: path.resolve(ROOT_PATH, './src/utils'),
-    //   links: path.resolve(ROOT_PATH, './src/links'),
-    //   errorMessages: path.resolve(ROOT_PATH, './src/errorMessages'),
-    //   menus: path.resolve(ROOT_PATH, './src/menus'),
-    // },
+    alias: {
+      containers: path.resolve(ROOT_PATH, './src/containers'),
+      components: path.resolve(ROOT_PATH, './src/components'),
+      routes: path.resolve(ROOT_PATH, './src/routes'),
+      links: path.resolve(ROOT_PATH, './src/links'),
+      menus: path.resolve(ROOT_PATH, './src/menus'),
+    },
   },
   entry: {
     bundle: [
