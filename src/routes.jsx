@@ -11,6 +11,7 @@ import {
   Test,
   MainPage,
   SignIn,
+  SignUp,
 } from 'containers';
 
 export const routes = {
@@ -19,10 +20,10 @@ export const routes = {
       path: links.signIn,
       component: SignIn,
     },
-    // register: {
-    //   path: links.register,
-    //   component: Registration,
-    // },
+    register: {
+      path: links.signUp,
+      component: SignUp,
+    },
     main: {
       path: '/main',
       component: MainPage,
