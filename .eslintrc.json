@@ -60,6 +60,12 @@
         ], [
           "menus",
           "./src/menus"
+        ], [
+          "utils",
+          "./src/utils"
+        ], [
+          "formComponentType",
+          "./src/formComponentType"
         ]],
         "extensions": [
           ".js",

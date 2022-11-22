@@ -14,6 +14,8 @@ const config = {
       routes: path.resolve(ROOT_PATH, './src/routes'),
       links: path.resolve(ROOT_PATH, './src/links'),
       menus: path.resolve(ROOT_PATH, './src/menus'),
+      utils: path.resolve(ROOT_PATH, './src/utils'),
+      formComponentType: path.resolve(ROOT_PATH, './src/formComponentType'),
     },
   },
   entry: {

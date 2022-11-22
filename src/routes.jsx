@@ -5,19 +5,20 @@ import {
   BrowserRouter,
   Navigate,
 } from 'react-router-dom';
-// import links from 'links';
+import links from 'links';
 import {
   CoreLayout,
   Test,
   MainPage,
-} from './containers';
+  SignIn,
+} from 'containers';
 
 export const routes = {
   public: {
-    // signIn: {
-    //   path: links.signIn,
-    //   component: SignIn,
-    // },
+    signIn: {
+      path: links.signIn,
+      component: SignIn,
+    },
     // register: {
     //   path: links.register,
     //   component: Registration,

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import 'antd/dist/antd.less';
-import enUS from 'antd/lib/locale/en_US';
+// import enUS from 'antd/lib/locale/en_US';
 import {
   ConfigProvider,
   Layout,
@@ -53,7 +53,7 @@ const FallbackComponent = ({ resetErrorBoundary }) => (
 );
 
 const CoreLayout = ({ children }) => (
-  <ConfigProvider locale={ enUS }>
+  <ConfigProvider>
     <Layout
       style={ {
         height: '100%',
