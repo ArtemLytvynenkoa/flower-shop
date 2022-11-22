@@ -16,6 +16,8 @@ const config = {
       menus: path.resolve(ROOT_PATH, './src/menus'),
       utils: path.resolve(ROOT_PATH, './src/utils'),
       formComponentType: path.resolve(ROOT_PATH, './src/formComponentType'),
+      fire: path.resolve(ROOT_PATH, './src/firebace'),
+      errorMessages: path.resolve(ROOT_PATH, './src/errorMessages'),
     },
   },
   entry: {
