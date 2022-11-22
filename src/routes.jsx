@@ -85,7 +85,7 @@ const AppRoutes = () => (
       <Routes>
         { getPublicRoutes(routes.public) }
         { /* { getPrivateRoutes(routes.private) } */ }
-        <Route path="*" element={ <Test /> } />
+        <Route path="*" element={ <MainPage /> } />
       </Routes>
     </CoreLayout>
   </BrowserRouter>
