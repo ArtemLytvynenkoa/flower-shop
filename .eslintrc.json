@@ -16,8 +16,7 @@
     "babel",
     "import",
     "jsx-a11y",
-    "promise",
-    "react-hooks"
+    "promise"
   ],
   "globals": {
     "NodeJS": true,
@@ -29,61 +28,52 @@
     "node": true,
     "jest": true
   },
-  // "parser": "@typescript-eslint/parser",
-  // "parserOptions": {
-  //   "ecmaVersion": 11,
-  //   "sourceType": "module",
-  //   "ecmaFeatures": {
-  //     "jsx": true
-  //   }
-  // },
-  // "settings": {
-  //   "import/parsers": {
-  //     "@typescript-eslint/parser": [
-  //       ".ts",
-  //       ".tsx"
-  //     ]
-  //   },
-  //   "import/resolver": {
-  //     "typescript": {
-  //       "alwaysTryTypes": true
-  //     },
-  //     "alias": {
-  //       "map": [[
-  //         "components",
-  //         "./src/components"
-  //       ], [
-  //         "containers",
-  //         "./src/containers"
-  //       ], [
-  //         "routes",
-  //         "./src/routes"
-  //       ], [
-  //         "fire",
-  //         "./src/firebase"
-  //       ], [
-  //         "types",
-  //         "./src/types"
-  //       ], [
-  //         "utils",
-  //         "./src/utils"
-  //       ], [
-  //         "links",
-  //         "./src/links"
-  //       ], [
-  //         "errorMessages",
-  //         "./src/errorMessages"
-  //       ], [
-  //         "menus",
-  //         "./src/menus"
-  //       ]],
-  //       "extensions": [
-  //         ".ts",
-  //         ".tsx"
-  //       ]
-  //     }
-  //   }
-  // },
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "settings": {
+    "import/parsers": {
+      "@babel/eslint-parser": [
+        ".js",
+        ".jsx"
+      ]
+    },
+    "import/resolver": {
+      "alias": {
+        "map": [[
+          "components",
+          "./src/components"
+        ], [
+          "containers",
+          "./src/containers"
+        ], [
+          "routes",
+          "./src/routes"
+        ], [
+          "links",
+          "./src/links"
+        ], [
+          "menus",
+          "./src/menus"
+        ], [
+          "utils",
+          "./src/utils"
+        ], [
+          "formComponentType",
+          "./src/formComponentType"
+        ]],
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    }
+  },
   "ignorePatterns": "src/codegen",
   "rules": {
     // common
@@ -180,10 +170,9 @@
     "react/no-unused-prop-types": 0,
 
     // import
-    "import/names": 0, // typescript provides that check
+    "import/names": 0, 
     "import/extensions": [1, "never"],
 
     "no-unused-vars": "off"
-    // "@typescript-eslint/no-unused-vars": ["error"]
   }
 }
