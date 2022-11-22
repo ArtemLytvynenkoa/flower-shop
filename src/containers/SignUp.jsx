@@ -46,7 +46,7 @@ const SignUp = () => {
   }
 
   if (user) {
-    return <Navigate to={ links.test } replace />;
+    return <Navigate to={ links.profile } replace />;
   }
 
   return (

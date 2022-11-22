@@ -1,3 +1,4 @@
+import { UserOutlined } from '@ant-design/icons';
 import {
   Button,
   Space,
@@ -24,9 +25,18 @@ export const RightHeader = () => {
       } }
     >
       { user &&
-        <Button type="primary" onClick={ () => signOut(auth) }>
-          Вийти
-        </Button>
+        <Space>
+          <Button
+            type="link"
+          >
+            <Link to={ links.profile }>
+              <UserOutlined />
+            </Link>
+          </Button>
+          <Button type="primary" onClick={ () => signOut(auth) }>
+            Вийти
+          </Button>
+        </Space>
       }
       { !user &&
         <Space>
