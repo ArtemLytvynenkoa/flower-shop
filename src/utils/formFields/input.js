@@ -69,3 +69,15 @@ export const phone = getPhoneField({
   },
   componentProps: {},
 });
+
+export const goodsName = getInputField({
+  formItemProps: {
+    name: 'goodsName',
+    required: true,
+    label: 'Назва товару',
+  },
+  componentProps: {
+    placeholder: 'Введіть назву товару',
+    disabled: false,
+  },
+});

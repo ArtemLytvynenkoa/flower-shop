@@ -9,11 +9,11 @@ import {
 import links from 'links';
 import {
   CoreLayout,
-  Test,
   MainPage,
   SignIn,
   SignUp,
   UserProfile,
+  ProductAdditionForm,
 } from 'containers';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'fire';
@@ -32,9 +32,9 @@ export const routes = {
       path: links.main,
       component: MainPage,
     },
-    test: {
-      path: links.test,
-      component: Test,
+    pdf: {
+      path: links.pdf,
+      component: ProductAdditionForm,
     },
   },
   private: {

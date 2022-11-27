@@ -14,19 +14,23 @@ import {
   Row,
   Space,
 } from 'antd';
-import { auth } from 'fire';
+import {
+  auth,
+  setUser,
+} from 'fire';
 import {
   useAuthState,
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
 } from 'react-firebase-hooks/auth';
 import errorMessages from 'errorMessages';
+import { addDoc } from 'firebase/firestore/lite';
 
 const SignUp = () => {
   const [user, loading] = useAuthState(auth);
 
   const [createUserWithEmailAndPassword,, isUserLoading, error] = useCreateUserWithEmailAndPassword(auth);
-  const [signInWithGoogle, , isGoogleUserLoading, googleSignInError] = useSignInWithGoogle(auth);
+  const [signInWithGoogle,, isGoogleUserLoading, googleSignInError] = useSignInWithGoogle(auth);
 
   useEffect(() => {
     if (error) {
@@ -46,6 +50,13 @@ const SignUp = () => {
   }
 
   if (user) {
+    setUser({
+      uid: user.uid,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      photoURL: user.photoURL,
+    });
+
     return <Navigate to={ links.profile } replace />;
   }
 
@@ -80,7 +91,7 @@ const SignUp = () => {
                 loading={ isGoogleUserLoading }
                 onClick={ () => signInWithGoogle() }
               >
-                Зареєструватися за допомогою Google
+                Увійти за допомогою Google
               </Button>
             </Space>
           }

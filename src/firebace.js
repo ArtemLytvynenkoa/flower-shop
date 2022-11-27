@@ -1,6 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getAnalytics } from 'firebase/analytics';
+import {
+  getFirestore,
+  collection,
+  addDoc,
+} from 'firebase/firestore/lite';
 import { getAuth } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -19,7 +23,21 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const db = getFirestore(app);
 
-// eslint-disable-next-line import/prefer-default-export
+export const goodsRef = collection(db, 'goods');
+export const usersRef = collection(db, 'users');
+export const ordersRef = collection(db, 'orders');
 export const auth = getAuth(app);
+
+export const setUser = async data => {
+  await addDoc(usersRef, data);
+};
+
+export const setGood = async data => {
+  await addDoc(goodsRef, data);
+};
+
+export const setOrder = async data => {
+  await addDoc(ordersRef, data);
+};

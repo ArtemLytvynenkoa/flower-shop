@@ -1,7 +1,7 @@
 export default {
   // public
   main: '/main',
-  test: '/test',
+  pdf: '/pdf',
   signIn: '/signIn',
   signUp: '/signUp',
   // private

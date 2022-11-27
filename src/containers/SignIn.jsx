@@ -61,7 +61,9 @@ const SignIn = () => {
           buttonText="Увійти"
           isLoading={ isUserLoading }
           initialValues={ { remember: true } }
-          onSubmit={ values => signInWithEmailAndPassword(values.email, values.password) }
+          onSubmit={ values => {
+            signInWithEmailAndPassword(values.email, values.password);
+          } }
           fields={ [
             signInForm.email,
             signInForm.password,

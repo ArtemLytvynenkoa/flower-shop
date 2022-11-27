@@ -1,4 +1,4 @@
-export { default as Test } from './Test';
+export { default as ProductAdditionForm } from './ProductAdditionForm';
 export { default as MainPage } from './MainPage';
 export { default as CoreLayout } from './CoreLayout';
 export { default as SignIn } from './SignIn';
