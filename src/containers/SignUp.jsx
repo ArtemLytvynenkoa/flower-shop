@@ -24,7 +24,6 @@ import {
   useSignInWithGoogle,
 } from 'react-firebase-hooks/auth';
 import errorMessages from 'errorMessages';
-import { addDoc } from 'firebase/firestore/lite';
 
 const SignUp = () => {
   const [user, loading] = useAuthState(auth);

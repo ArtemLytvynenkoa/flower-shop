@@ -32,15 +32,15 @@ export const routes = {
       path: links.main,
       component: MainPage,
     },
-    pdf: {
-      path: links.pdf,
-      component: ProductAdditionForm,
-    },
   },
   private: {
     profile: {
       path: links.profile,
       component: UserProfile,
+    },
+    productAdditionForm: {
+      path: links.productAdditionForm,
+      component: ProductAdditionForm,
     },
   },
 };

@@ -3,8 +3,11 @@ import React from 'react';
 import { Form } from 'components';
 import { productAdditionFormFields } from 'utils';
 import {
-  Col, Row,
+  Col,
+  Row,
 } from 'antd';
+import { setGood } from 'fire';
+import ProductImages from './ProductImages';
 
 const ProductAdditionForm = () => {
   const [form] = useForm();
@@ -18,10 +21,16 @@ const ProductAdditionForm = () => {
       <Col xs={ 24 } lg={ 6 }>
         <Form
           form={ form }
+          onSubmit={ async values => setGood({
+            price: values.price,
+            goodsName: values.goodsName,
+            description: values.description,
+          }) }
           fields={ [
             productAdditionFormFields.goodsName,
             productAdditionFormFields.price,
             productAdditionFormFields.description,
+            <ProductImages key="upload" />,
           ] }
         />
       </Col>

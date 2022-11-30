@@ -46,7 +46,7 @@ const SignIn = () => {
   }
 
   if (user) {
-    return <Navigate to={ links.profile } />;
+    return <Navigate to={ links.productAdditionForm } />;
   }
 
   return (

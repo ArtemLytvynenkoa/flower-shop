@@ -4,6 +4,8 @@ import {
   getFirestore,
   collection,
   addDoc,
+  setDoc,
+  doc,
 } from 'firebase/firestore/lite';
 import { getAuth } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
@@ -31,13 +33,13 @@ export const ordersRef = collection(db, 'orders');
 export const auth = getAuth(app);
 
 export const setUser = async data => {
-  await addDoc(usersRef, data);
+  await setDoc(doc(usersRef, data.uid), data);
 };
 
 export const setGood = async data => {
-  await addDoc(goodsRef, data);
+  await setDoc(doc(goodsRef), data);
 };
 
 export const setOrder = async data => {
-  await addDoc(ordersRef, data);
+  await setDoc(doc(ordersRef), data);
 };
