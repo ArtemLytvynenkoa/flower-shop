@@ -81,3 +81,15 @@ export const goodsName = getInputField({
     disabled: false,
   },
 });
+
+export const productCode = getInputField({
+  formItemProps: {
+    name: 'productCode',
+    required: true,
+    label: 'Код товару',
+  },
+  componentProps: {
+    placeholder: 'Введіть код товару',
+    disabled: false,
+  },
+});

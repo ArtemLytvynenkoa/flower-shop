@@ -3,11 +3,11 @@ import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
   collection,
-  addDoc,
   setDoc,
   doc,
 } from 'firebase/firestore/lite';
 import { getAuth } from 'firebase/auth';
+import { getStorage } from 'firebase/storage';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -27,10 +27,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+export const storage = getStorage(app);
+export const auth = getAuth(app);
+
 export const goodsRef = collection(db, 'goods');
 export const usersRef = collection(db, 'users');
 export const ordersRef = collection(db, 'orders');
-export const auth = getAuth(app);
 
 export const setUser = async data => {
   await setDoc(doc(usersRef, data.uid), data);

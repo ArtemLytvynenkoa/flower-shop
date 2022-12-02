@@ -5,6 +5,7 @@ import {
   confirmPass,
   phone,
   goodsName,
+  productCode,
 } from './input';
 import { price } from './number';
 import { description } from './textArea';
@@ -26,6 +27,7 @@ const productAdditionFormFields = {
   goodsName,
   price,
   description,
+  productCode,
 };
 
 export {
