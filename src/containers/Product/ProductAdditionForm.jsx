@@ -34,6 +34,7 @@ const ProductAdditionForm = () => {
                 productCode: values.productCode,
                 image: values.image,
               });
+              form.resetFields();
             } catch (error) {
               message.error(error.message);
             }
