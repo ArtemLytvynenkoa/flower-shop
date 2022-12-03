@@ -6,4 +6,6 @@ export default {
   // private
   profile: '/profile',
   productAdditionForm: '/productAdditionForm',
+  goods: '/goods',
+  orders: '/orders',
 };

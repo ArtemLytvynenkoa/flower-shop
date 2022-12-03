@@ -1,4 +1,5 @@
 import {
+  Button,
   Col,
   Image,
   message,
@@ -14,7 +15,6 @@ import {
   getFirestore,
   collection,
 } from 'firebase/firestore';
-import errorMessages from 'errorMessages';
 
 const { Text } = Typography;
 
@@ -22,13 +22,6 @@ const MainPage = () => {
   const [values, loading, error] = useCollectionData(
     collection(getFirestore(app), 'goods'),
   );
-
-  useEffect(() => {
-    if (error) {
-      console.log(error.code);
-      message.error(errorMessages[error.code]);
-    }
-  }, [error]);
 
   if (loading) {
     return <LoadingIndicator />;
@@ -60,6 +53,7 @@ const MainPage = () => {
             </Text>
             <Text>{ value.productCode }</Text>
             <Text>{ value.description }</Text>
+            <Button type="primary">Додати в корзину</Button>
           </Space>
         </Col>
       )) }

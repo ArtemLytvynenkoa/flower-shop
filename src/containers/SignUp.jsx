@@ -56,7 +56,7 @@ const SignUp = () => {
       photoURL: user.photoURL,
     });
 
-    return <Navigate to={ links.profile } replace />;
+    return <Navigate to={ links.main } replace />;
   }
 
   return (

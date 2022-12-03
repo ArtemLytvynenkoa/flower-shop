@@ -14,6 +14,7 @@ import {
   SignUp,
   UserProfile,
   ProductAdditionForm,
+  Products,
 } from 'containers';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'fire';
@@ -37,6 +38,10 @@ export const routes = {
     profile: {
       path: links.profile,
       component: UserProfile,
+    },
+    goods: {
+      path: links.goods,
+      component: Products,
     },
     productAdditionForm: {
       path: links.productAdditionForm,
