@@ -39,7 +39,7 @@ export const setUser = async data => {
 };
 
 export const setGood = async data => {
-  await setDoc(doc(goodsRef), data);
+  await setDoc(doc(goodsRef, data.id), data);
 };
 
 export const setOrder = async data => {

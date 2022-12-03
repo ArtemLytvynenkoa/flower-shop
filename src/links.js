@@ -8,4 +8,5 @@ export default {
   productAdditionForm: '/productAdditionForm',
   goods: '/goods',
   orders: '/orders',
+  users: '/users',
 };

@@ -15,6 +15,7 @@ const { Item } = AntdForm;
 
 const ProductAdditionForm = () => {
   const [form] = useForm();
+  const [isLoading, setIsloading] = useState(false);
 
   return (
     <Row
@@ -25,15 +26,19 @@ const ProductAdditionForm = () => {
       <Col xs={ 24 } lg={ 6 }>
         <Form
           form={ form }
+          isLoading={ isLoading }
           onSubmit={ async values => {
             try {
+              setIsloading(true);
               await setGood({
                 price: values.price,
                 goodsName: values.goodsName,
                 description: values.description,
                 productCode: values.productCode,
                 image: values.image,
+                id: `${values.goodsName}-${values.productCode}`,
               });
+              setIsloading(false);
               form.resetFields();
             } catch (error) {
               message.error(error.message);

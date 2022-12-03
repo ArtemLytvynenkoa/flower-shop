@@ -14,10 +14,16 @@ import {
   ref,
 } from 'firebase/storage';
 import { CloseOutlined } from '@ant-design/icons';
+import { LoadingIndicator } from 'components';
 
 const ProductImageUpload = ({ onChange, value }) => {
   const [imageRef, setImageRef] = useState(null);
+  const [isLoading, setIsloading] = useState(false);
   const [uploadFile, uploading, snapshot, error] = useUploadFile();
+
+  if (isLoading && !value) {
+    return <LoadingIndicator />;
+  }
 
   if (value) {
     return (
@@ -28,7 +34,9 @@ const ProductImageUpload = ({ onChange, value }) => {
             danger
             size="small"
             onClick={ async () => {
+              setIsloading(true);
               await deleteObject(imageRef);
+              setIsloading(false);
               setImageRef(null);
               onChange(null);
             } }
@@ -50,10 +58,12 @@ const ProductImageUpload = ({ onChange, value }) => {
       beforeUpload={ () => false }
       onChange={ async ({ file }) => {
         const imageRef = (ref(storage, `images/${file.name}-${file.uid}`));
+        setIsloading(true);
         await uploadFile(imageRef, file);
         const url = await getDownloadURL(imageRef);
         setImageRef(imageRef);
         onChange(url);
+        setIsloading(false);
       } }
     >
       <Button

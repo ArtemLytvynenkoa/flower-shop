@@ -40,7 +40,7 @@ export const RightHeader = () => {
             type="link"
           >
             { user.uid === 'Rdhlz2WT9MU9im8yLXTaASids352' &&
-              <Link to={ links.goods }>
+              <Link to={ links.productAdditionForm }>
                 <SettingOutlined />
               </Link>
             }

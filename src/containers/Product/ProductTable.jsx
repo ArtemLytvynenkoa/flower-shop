@@ -11,6 +11,7 @@ const ProductTable = () => {
   const [values, loading, error] = useCollectionData(
     collection(getFirestore(app), 'goods'),
   );
+  console.log(values);
 
   return (
     <Table
@@ -18,7 +19,7 @@ const ProductTable = () => {
       columns={ [{
         title: 'ФОТО ТОВАРУ',
         dataIndex: 'image',
-        // width: 165,
+        width: 165,
         render: (_, record) => (
           <div
             style={ {
@@ -31,7 +32,7 @@ const ProductTable = () => {
           >
             <img
               alt={ record.goodsName || 'image' }
-              src={ record.imageUrl ? record.imageUrl : undefined }
+              src={ record.image ? record.image : undefined }
               style={ {
                 maxWidth: '100%',
                 maxHeight: '100%',
@@ -42,11 +43,11 @@ const ProductTable = () => {
       }, {
         title: 'НАЗВА ТОВАРУ',
         dataIndex: 'goodsName',
-        // width: 165,
+        width: 165,
       }, {
         title: 'ЦІНА',
         dataIndex: 'price',
-        // width: 165,
+        width: 165,
       }, {
         title: 'КОД ТОВАРУ',
         dataIndex: 'productCode',
