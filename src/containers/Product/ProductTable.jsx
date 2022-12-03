@@ -5,17 +5,21 @@ import {
 import React from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { app } from 'fire';
-import { Table } from 'antd';
+import {
+  Button,
+  Table,
+} from 'antd';
+import links from 'links';
 
 const ProductTable = () => {
   const [values, loading, error] = useCollectionData(
     collection(getFirestore(app), 'goods'),
   );
-  console.log(values);
 
   return (
     <Table
       dataSource={ values }
+      loading={ loading }
       columns={ [{
         title: 'ФОТО ТОВАРУ',
         dataIndex: 'image',
@@ -55,6 +59,20 @@ const ProductTable = () => {
       }, {
         title: 'ОПИС',
         dataIndex: 'description',
+        width: 165,
+      }, {
+        render: (_, record) => (
+          <div
+            style={ { textAlign: 'center' } }
+          >
+            <Button
+              type="primary"
+              onClick={ () => window.open(`${links.goods}/${record.id}`, '_blank') }
+            >
+              Редагувати
+            </Button>
+          </div>
+        ),
         width: 165,
       }] }
     />

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import 'antd/dist/antd.less';
-// import enUS from 'antd/lib/locale/en_US';
+import '../styles.scss';
 import {
   ConfigProvider,
   Layout,
