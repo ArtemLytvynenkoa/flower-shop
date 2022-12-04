@@ -2,12 +2,11 @@ import {
   Button,
   Col,
   Image,
-  message,
   Row,
   Space,
   Typography,
 } from 'antd';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { app } from 'fire';
 import { LoadingIndicator } from 'components';

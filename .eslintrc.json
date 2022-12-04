@@ -64,11 +64,11 @@
           "utils",
           "./src/utils"
         ], [
-          "formComponentType",
-          "./src/formComponentType"
+          "formComponentTypes",
+          "./src/formComponentTypes"
         ], [
           "fire",
-          "./src/firebace"
+          "./src/firebase"
         ], [
           "errorMessages",
           "./src/errorMessages"

@@ -44,7 +44,7 @@ export const routes = {
       component: Products,
       children: {
         good: {
-          path: '/:productId',
+          path: '/:goodId',
           component: Product,
         },
       },

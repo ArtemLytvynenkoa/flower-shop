@@ -1,5 +1,5 @@
 export { default as Product } from './Product/ProductAdditionForm';
-export { default as Products } from './Product/ProductTable';
+export { default as Products } from './Product/ProductsTable';
 export { default as MainPage } from './MainPage';
 export { default as CoreLayout } from './CoreLayout';
 export { default as SignIn } from './SignIn';
