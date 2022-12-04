@@ -4,9 +4,11 @@ import {
   password,
   confirmPass,
   phone,
+  goodsName,
+  productCode,
 } from './input';
-
-const carForm = { phone };
+import { price } from './number';
+import { description } from './textArea';
 
 const signInForm = {
   email,
@@ -21,8 +23,15 @@ const profileForm = {
   confirmPass,
 };
 
+const productAdditionFormFields = {
+  goodsName,
+  price,
+  description,
+  productCode,
+};
+
 export {
   signInForm,
-  carForm,
   profileForm,
+  productAdditionFormFields,
 };

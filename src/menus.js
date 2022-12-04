@@ -1,13 +1,9 @@
 import links from 'links';
 
 const menus = {
-  profile: {
+  main: {
     title: 'Головна',
     url: links.main,
-  },
-  advertisement: {
-    title: 'Test',
-    url: links.test,
   },
 };
 

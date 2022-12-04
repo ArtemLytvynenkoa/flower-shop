@@ -66,6 +66,12 @@
         ], [
           "formComponentType",
           "./src/formComponentType"
+        ], [
+          "fire",
+          "./src/firebace"
+        ], [
+          "errorMessages",
+          "./src/errorMessages"
         ]],
         "extensions": [
           ".js",

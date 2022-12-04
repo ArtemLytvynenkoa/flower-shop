@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import {
   Form,
@@ -14,10 +14,50 @@ import {
   Row,
   Space,
 } from 'antd';
-// import errorMessages from 'errorMessages';
+import {
+  auth,
+  setUser,
+} from 'fire';
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+} from 'react-firebase-hooks/auth';
+import errorMessages from 'errorMessages';
 
 const SignUp = () => {
+  const [user, loading] = useAuthState(auth);
+
+  const [createUserWithEmailAndPassword,, isUserLoading, error] = useCreateUserWithEmailAndPassword(auth);
+  const [signInWithGoogle,, isGoogleUserLoading, googleSignInError] = useSignInWithGoogle(auth);
+
+  useEffect(() => {
+    if (error) {
+      // console.log(error.code);
+      message.error(errorMessages[error.code]);
+    }
+    if (googleSignInError) {
+      // console.log(googleSignInError.code);
+      message.error(errorMessages[googleSignInError.code]);
+    }
+  }, [error, googleSignInError]);
+
   const [form] = useForm();
+
+  if (loading) {
+    return <LoadingIndicator />;
+  }
+
+  if (user) {
+    setUser({
+      uid: user.uid,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      photoURL: user.photoURL,
+    });
+
+    return <Navigate to={ links.main } replace />;
+  }
 
   return (
     <Row
@@ -31,10 +71,10 @@ const SignUp = () => {
       >
         <Form
           form={ form }
-          // isLoading={ isUserLoading }
+          isLoading={ isUserLoading }
           buttonText="Зареєструватися"
           initialValues={ { remember: true } }
-          // onSubmit={ values => createUserWithEmailAndPassword(values.email, values.password) }
+          onSubmit={ values => createUserWithEmailAndPassword(values.email, values.password) }
           fields={ [
             signInForm.email,
             signInForm.password,
@@ -44,20 +84,13 @@ const SignUp = () => {
               direction="vertical"
               style={ { width: '100%' } }
             >
-              { /* <Button
-                type="primary"
-                loading={ isWithFacebookSignIn }
-                onClick={ () => signInWithFacebook() }
-              >
-                Register with Facebook
-              </Button> */ }
               <Button
                 block
                 type="primary"
-                // loading={ isGoogleUserLoading }
-                // onClick={ () => signInWithGoogle() }
+                loading={ isGoogleUserLoading }
+                onClick={ () => signInWithGoogle() }
               >
-                Зареєструватися за допомогою Google
+                Увійти за допомогою Google
               </Button>
             </Space>
           }

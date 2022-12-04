@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import {
   Route,
@@ -8,11 +9,15 @@ import {
 import links from 'links';
 import {
   CoreLayout,
-  Test,
   MainPage,
   SignIn,
   SignUp,
+  UserProfile,
+  Product,
+  Products,
 } from 'containers';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from 'fire';
 
 export const routes = {
   public: {
@@ -25,26 +30,41 @@ export const routes = {
       component: SignUp,
     },
     main: {
-      path: '/main',
+      path: links.main,
       component: MainPage,
     },
-    test: {
-      path: '/test',
-      component: Test,
+  },
+  private: {
+    profile: {
+      path: links.profile,
+      component: UserProfile,
+    },
+    goods: {
+      path: links.goods,
+      component: Products,
+      children: {
+        good: {
+          path: '/:productId',
+          component: Product,
+        },
+      },
+    },
+    productAdditionForm: {
+      path: links.productAdditionForm,
+      component: Product,
     },
   },
-  // private: {},
 };
 
-// const PrivateRoute = ({ component: Component }) => {
-//   const [user] = useAuthState(auth);
+const PrivateRoute = ({ component: Component }) => {
+  const [user] = useAuthState(auth);
 
-//   if (user) {
-//     return <Component />;
-//   }
+  if (user) {
+    return <Component />;
+  }
 
-//   return <Navigate to={ links.signIn } />;
-// };
+  return <Navigate to={ links.signIn } />;
+};
 
 const getPublicRoutes = routes => Object
   .values(routes)
@@ -57,35 +77,35 @@ const getPublicRoutes = routes => Object
     />
   ));
 
-// const getPrivateRoutes = (routes, parentPath = '') => (
-//   Object
-//     .values(routes)
-//     .reduce>((acc, { path, component, children }) => {
-//       if (component) {
-//         acc.push(
-//           <Route
-//             key={ parentPath ? `${parentPath}${path}` : path }
-//             path={ parentPath ? `${parentPath}${path}` : path }
-//             element={ <PrivateRoute component={ component } /> }
-//           />,
-//         );
-//       }
+const getPrivateRoutes = (routes, parentPath = '') => (
+  Object
+    .values(routes)
+    .reduce((acc, { path, component, children }) => {
+      if (component) {
+        acc.push(
+          <Route
+            key={ parentPath ? `${parentPath}${path}` : path }
+            path={ parentPath ? `${parentPath}${path}` : path }
+            element={ <PrivateRoute component={ component } /> }
+          />,
+        );
+      }
 
-//       if (children) {
-//         return acc.concat(getPrivateRoutes(children, `${parentPath}${path}`));
-//       }
+      if (children) {
+        return acc.concat(getPrivateRoutes(children, `${parentPath}${path}`));
+      }
 
-//       return acc;
-//     }, [])
-// );
+      return acc;
+    }, [])
+);
 
 const AppRoutes = () => (
   <BrowserRouter>
     <CoreLayout>
       <Routes>
         { getPublicRoutes(routes.public) }
-        { /* { getPrivateRoutes(routes.private) } */ }
-        <Route path="*" element={ <Test /> } />
+        { getPrivateRoutes(routes.private) }
+        <Route path="*" element={ <MainPage /> } />
       </Routes>
     </CoreLayout>
   </BrowserRouter>
