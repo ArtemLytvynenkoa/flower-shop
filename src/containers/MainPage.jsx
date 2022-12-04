@@ -39,8 +39,8 @@ const MainPage = () => {
           <Space direction="vertical">
             <Image
               style={ { objectFit: 'contain' } }
-              alt={ value.goodsName }
-              src={ value.image || undefined }
+              alt={ value.image.name }
+              src={ value.image.url || undefined }
               preview
               width="500px"
               height="500px"

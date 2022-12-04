@@ -25,7 +25,7 @@ const ProductImageUpload = ({ onChange, value }) => {
     return <LoadingIndicator />;
   }
 
-  if (value) {
+  if (value?.url) {
     return (
       <Badge
         count={
@@ -35,7 +35,7 @@ const ProductImageUpload = ({ onChange, value }) => {
             size="small"
             onClick={ async () => {
               setIsloading(true);
-              await deleteObject(imageRef);
+              await deleteObject(imageRef || ref(storage, `images/${value.name}`));
               setIsloading(false);
               setImageRef(null);
               onChange(null);
@@ -44,7 +44,7 @@ const ProductImageUpload = ({ onChange, value }) => {
         }
         offset={ [-12, 0] }
       >
-        <Image src={ value } />
+        <Image src={ value?.url } />
       </Badge>
     );
   }
@@ -57,12 +57,15 @@ const ProductImageUpload = ({ onChange, value }) => {
       showUploadList={ false }
       beforeUpload={ () => false }
       onChange={ async ({ file }) => {
-        const imageRef = (ref(storage, `images/${file.name}-${file.uid}`));
+        const imageRef = ref(storage, `images/${file.name}`);
         setIsloading(true);
         await uploadFile(imageRef, file);
         const url = await getDownloadURL(imageRef);
         setImageRef(imageRef);
-        onChange(url);
+        onChange({
+          url,
+          name: file.name,
+        });
         setIsloading(false);
       } }
     >

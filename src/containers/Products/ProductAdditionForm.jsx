@@ -14,6 +14,8 @@ import {
   setGood,
   app,
   updateGood,
+  deleteGood,
+  storage,
 } from 'fire';
 import {
   Link,
@@ -26,6 +28,10 @@ import {
   getFirestore,
 } from 'firebase/firestore';
 import links from 'links';
+import {
+  deleteObject,
+  ref,
+} from 'firebase/storage';
 import ProductImageUpload from './ProductImageUpload';
 
 const { Item } = AntdForm;
@@ -44,6 +50,8 @@ const ProductAdditionForm = () => {
 
   const goodsData = value?.data();
 
+  form.setFieldsValue(goodsData);
+
   const navigate = useNavigate();
 
   return (
@@ -58,13 +66,28 @@ const ProductAdditionForm = () => {
           size={ 20 }
           style={ { width: '100%' } }
         >
-          <Button
-            onClick={ () => {} }
-          >
-            <Link to={ links.goods }>
-              До таблиці
-            </Link>
-          </Button>
+          <Space>
+            <Button
+              type="link"
+              style={ { padding: '0px' } }
+            >
+              <Link to={ links.goods }>
+                До таблиці
+              </Link>
+            </Button>
+            <Button
+              type="primary"
+              onClick={ async () => {
+                setIsloading(true);
+                await deleteObject(ref(storage, `images/${goodsData.image.name}`));
+                await deleteGood(goodId);
+                setIsloading(false);
+                navigate(`${links.goods}`);
+              } }
+            >
+              Видалити Товар
+            </Button>
+          </Space>
           <Form
             form={ form }
             isLoading={ isLoading || loading }

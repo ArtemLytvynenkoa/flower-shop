@@ -47,8 +47,8 @@ const ProductsTable = () => {
               } }
             >
               <img
-                alt={ record.goodsName || 'image' }
-                src={ record.image ? record.image : undefined }
+                alt={ record.image.name || 'image' }
+                src={ record?.image?.url }
                 style={ {
                   maxWidth: '100%',
                   maxHeight: '100%',

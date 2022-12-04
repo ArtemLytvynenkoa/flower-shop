@@ -6,6 +6,7 @@ import {
   setDoc,
   doc,
   updateDoc,
+  deleteDoc,
 } from 'firebase/firestore/lite';
 import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
@@ -45,6 +46,10 @@ export const setGood = async data => {
 
 export const updateGood = async (data, id) => {
   await updateDoc(doc(goodsRef, id), data);
+};
+
+export const deleteGood = async id => {
+  await deleteDoc(doc(goodsRef, id));
 };
 
 export const setOrder = async data => {
