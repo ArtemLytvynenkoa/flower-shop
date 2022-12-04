@@ -43,8 +43,6 @@ const ProductAdditionForm = () => {
 
   const goodsData = value?.data();
 
-  console.log(goodsData);
-
   form.setFieldsValue(goodsData);
 
   const navigate = useNavigate();
@@ -70,7 +68,7 @@ const ProductAdditionForm = () => {
           </Button>
           <Form
             form={ form }
-            isLoading={ isLoading }
+            isLoading={ isLoading || loading }
             values={ goodsData }
             buttonText={ !isNewGood ? 'Змінити' : 'Завантажити' }
             onSubmit={ async values => {

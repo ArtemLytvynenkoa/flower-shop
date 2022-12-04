@@ -4,6 +4,8 @@ import {
 } from '@ant-design/icons';
 import {
   Button,
+  Dropdown,
+  Menu,
   Space,
 } from 'antd';
 import { auth } from 'fire';
@@ -28,23 +30,53 @@ export const RightHeader = () => {
       } }
     >
       { user &&
-        <Space>
+        <Space size={ 20 }>
           <Button
             type="link"
+            style={ { padding: '0' } }
           >
             <Link to={ links.profile }>
               <UserOutlined />
             </Link>
           </Button>
-          <Button
-            type="link"
-          >
-            { user.uid === 'Rdhlz2WT9MU9im8yLXTaASids352' &&
-              <Link to={ links.goods }>
-                <SettingOutlined />
-              </Link>
-            }
-          </Button>
+          { user.uid === 'Rdhlz2WT9MU9im8yLXTaASids352' &&
+            <Dropdown
+              trigger={ ['hover'] }
+              overlay={
+                <Menu
+                  theme="dark"
+                  style={ {
+                    padding: '0.7rem',
+                    marginTop: '0.5rem',
+                  } }
+                  items={ [{
+                    key: 'goods',
+                    label: (
+                      <Link to={ links.goods }>
+                        Товари
+                      </Link>
+                    ),
+                  }, {
+                    key: 'orders',
+                    label: (
+                      <Link to={ links.orders }>
+                        Замовлення
+                      </Link>
+                    ),
+                  }, {
+                    key: 'users',
+                    label: (
+                      <Link to={ links.users }>
+                        Користтувачі
+                      </Link>
+                    ),
+                  }] }
+                />
+              }
+            >
+              <SettingOutlined />
+            </Dropdown>
+          }
           <Button type="primary" onClick={ () => signOut(auth) }>
             Вийти
           </Button>

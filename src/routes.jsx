@@ -15,6 +15,8 @@ import {
   UserProfile,
   Product,
   Products,
+  Orders,
+  Users,
 } from 'containers';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'fire';
@@ -49,9 +51,25 @@ export const routes = {
         },
       },
     },
-    productAdditionForm: {
-      path: links.productAdditionForm,
-      component: Product,
+    orders: {
+      path: links.orders,
+      component: Orders,
+      // children: {
+      //   good: {
+      //     path: '/:orderId',
+      //     component: Order,
+      //   },
+      // },
+    },
+    users: {
+      path: links.users,
+      component: Users,
+      // children: {
+      //   good: {
+      //     path: '/:userId',
+      //     component: User,
+      //   },
+      // },
     },
   },
 };
