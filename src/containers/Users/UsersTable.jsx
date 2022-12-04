@@ -17,6 +17,7 @@ const UsersTable = () => {
   const [values, loading, error] = useCollectionData(
     collection(getFirestore(app), 'users'),
   );
+  console.log(values);
 
   return (
     <Space
@@ -32,6 +33,40 @@ const UsersTable = () => {
       <Table
         dataSource={ values }
         loading={ loading }
+        columns={ [{
+          title: 'Електронна пошта',
+          dataIndex: 'email',
+          width: 165,
+        }, {
+          title: 'Телефон',
+          dataIndex: 'phoneNumber',
+          width: 165,
+        }, {
+          title: 'Телефон',
+          dataIndex: 'photoUrl',
+          width: 165,
+          render: (_, record) => (
+            <div
+              style={ {
+                display: 'flex',
+                width: '100px',
+                height: '100px',
+                alignItems: 'center',
+                justifyContent: 'center',
+              } }
+            >
+              <img
+                alt={ record.photoUrl || 'image' }
+                src={ record.photoUrl ? record.photoUrl : undefined }
+                style={ {
+                  maxWidth: '100%',
+                  maxHeight: '100%',
+                  borderRadius: '50%',
+                } }
+              />
+            </div>
+          ),
+        }] }
       />
     </Space>
   );

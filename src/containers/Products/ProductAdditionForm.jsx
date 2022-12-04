@@ -17,7 +17,8 @@ import {
 } from 'fire';
 import {
   Link,
-  useNavigate, useParams,
+  useNavigate,
+  useParams,
 } from 'react-router-dom';
 import { useDocument } from 'react-firebase-hooks/firestore';
 import {
@@ -43,8 +44,6 @@ const ProductAdditionForm = () => {
 
   const goodsData = value?.data();
 
-  form.setFieldsValue(goodsData);
-
   const navigate = useNavigate();
 
   return (
@@ -69,12 +68,12 @@ const ProductAdditionForm = () => {
           <Form
             form={ form }
             isLoading={ isLoading || loading }
-            values={ goodsData }
+            initialValues={ goodsData }
             buttonText={ !isNewGood ? 'Змінити' : 'Завантажити' }
             onSubmit={ async values => {
-              if (isNewGood) {
-                try {
-                  setIsloading(true);
+              try {
+                setIsloading(true);
+                if (isNewGood) {
                   await setGood({
                     price: values.price,
                     goodsName: values.goodsName,
@@ -83,16 +82,8 @@ const ProductAdditionForm = () => {
                     image: values.image,
                     id: `${values.goodsName}-${values.productCode}`,
                   });
-                  message.success('Готово');
-                  setIsloading(false);
                   navigate(`${links.goods}/${values.goodsName}-${values.productCode}`);
-                } catch (error) {
-                  message.error(error.message);
-                  setIsloading(false);
-                }
-              } else {
-                try {
-                  setIsloading(true);
+                } else {
                   await updateGood({
                     price: values.price,
                     goodsName: values.goodsName,
@@ -100,12 +91,12 @@ const ProductAdditionForm = () => {
                     productCode: values.productCode,
                     image: values.image,
                   }, goodId);
-                  message.success('Готово');
-                  setIsloading(false);
-                } catch (error) {
-                  message.error(error.message);
-                  setIsloading(false);
                 }
+                message.success('Готово');
+                setIsloading(false);
+              } catch (error) {
+                message.error(error.message);
+                setIsloading(false);
               }
             } }
             fields={ [

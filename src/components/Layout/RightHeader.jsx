@@ -1,5 +1,6 @@
 import {
   SettingOutlined,
+  ShoppingCartOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import {
@@ -39,6 +40,14 @@ export const RightHeader = () => {
               <UserOutlined />
             </Link>
           </Button>
+          <Button
+            type="link"
+            style={ { padding: '0' } }
+          >
+            <Link to={ links.basket }>
+              <ShoppingCartOutlined />
+            </Link>
+          </Button>
           { user.uid === 'Rdhlz2WT9MU9im8yLXTaASids352' &&
             <Dropdown
               trigger={ ['hover'] }
@@ -67,7 +76,7 @@ export const RightHeader = () => {
                     key: 'users',
                     label: (
                       <Link to={ links.users }>
-                        Користтувачі
+                        Користувачі
                       </Link>
                     ),
                   }] }

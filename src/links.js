@@ -9,4 +9,5 @@ export default {
   goods: '/goods',
   orders: '/orders',
   users: '/users',
+  basket: '/basket',
 };
