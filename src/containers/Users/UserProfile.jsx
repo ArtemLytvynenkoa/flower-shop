@@ -18,7 +18,7 @@ import {
 import {
   doc,
   getFirestore,
-} from 'firebase/firestore/lite';
+} from 'firebase/firestore';
 import React, {
   useEffect,
   useState,
