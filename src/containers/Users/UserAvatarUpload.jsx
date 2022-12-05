@@ -52,7 +52,7 @@ const UserAvatarUpload = ({ onChange, value }) => {
   return (
 
     <Upload
-      name="userAvatar"
+      name="photoURL"
       accept="image/png, image/jpeg"
       showUploadList={ false }
       beforeUpload={ () => false }

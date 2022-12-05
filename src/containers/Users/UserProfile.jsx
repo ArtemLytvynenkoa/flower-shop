@@ -52,6 +52,8 @@ const UserProfile = () => {
     doc(getFirestore(app), 'users', userId),
   );
 
+  console.log(value?.data());
+
   useEffect(() => {
     if (profileError) {
       message.error(errorMessages[profileError.code]);
@@ -91,8 +93,8 @@ const UserProfile = () => {
             >
               { !user?.photoURL ? user?.displayName : null }
             </Avatar>,
-            <Item key="userAvatar" name="userAvatar" noStyle>
-              <UserAvatarUpload key="userAvatar" />
+            <Item key="userAvatar" name="photoURL" noStyle>
+              <UserAvatarUpload />
             </Item>,
             profileForm.name,
             profileForm.email,
@@ -111,7 +113,7 @@ const UserProfile = () => {
                   phoneNumber: values.userPhone,
                   userName: values.name,
                   photoURL: values.userAvatar,
-                }, user.uid);
+                }, userId);
                 message.success('Готово');
               }
             } catch (error) {
