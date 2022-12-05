@@ -78,11 +78,15 @@ const ProductAdditionForm = () => {
             <Button
               type="primary"
               onClick={ async () => {
-                setIsloading(true);
-                await deleteObject(ref(storage, `images/${goodsData.image.name}`));
-                await deleteGood(goodId);
-                setIsloading(false);
-                navigate(`${links.goods}`);
+                try {
+                  setIsloading(true);
+                  await deleteObject(ref(storage, `images/${goodsData.image.name}`));
+                  await deleteGood(goodId);
+                  setIsloading(false);
+                  navigate(`${links.goods}`);
+                } catch (error) {
+                  message.error(error.message);
+                }
               } }
             >
               Видалити Товар

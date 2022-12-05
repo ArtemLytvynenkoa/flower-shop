@@ -12,7 +12,7 @@ import {
   MainPage,
   SignIn,
   SignUp,
-  UserProfile,
+  User,
   Product,
   Products,
   Orders,
@@ -37,10 +37,6 @@ export const routes = {
     },
   },
   private: {
-    profile: {
-      path: links.profile,
-      component: UserProfile,
-    },
     goods: {
       path: links.goods,
       component: Products,
@@ -64,12 +60,12 @@ export const routes = {
     users: {
       path: links.users,
       component: Users,
-      // children: {
-      //   good: {
-      //     path: '/:userId',
-      //     component: User,
-      //   },
-      // },
+      children: {
+        user: {
+          path: '/:userId',
+          component: User,
+        },
+      },
     },
   },
 };

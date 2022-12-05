@@ -61,15 +61,6 @@ export const name = getInputField({
   },
 });
 
-export const phone = getPhoneField({
-  formItemProps: {
-    name: 'phone',
-    rules: [{ required: true }],
-    label: 'Phone',
-  },
-  componentProps: {},
-});
-
 export const goodsName = getInputField({
   formItemProps: {
     name: 'goodsName',

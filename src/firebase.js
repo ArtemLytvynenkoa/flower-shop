@@ -40,6 +40,10 @@ export const setUser = async data => {
   await setDoc(doc(usersRef, data.uid), data);
 };
 
+export const updateUser = async (data, id) => {
+  await updateDoc(doc(usersRef, id), data);
+};
+
 export const setGood = async data => {
   await setDoc(doc(goodsRef, data.id), data);
 };

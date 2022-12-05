@@ -36,7 +36,7 @@ export const RightHeader = () => {
             type="link"
             style={ { padding: '0' } }
           >
-            <Link to={ links.profile }>
+            <Link to={ `${links.users}/${user.uid}` }>
               <UserOutlined />
             </Link>
           </Button>

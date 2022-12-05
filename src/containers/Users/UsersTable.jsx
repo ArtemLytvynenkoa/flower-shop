@@ -6,6 +6,7 @@ import React from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { app } from 'fire';
 import {
+  Avatar,
   Button,
   Space,
   Table,
@@ -42,29 +43,18 @@ const UsersTable = () => {
           dataIndex: 'phoneNumber',
           width: 165,
         }, {
-          title: 'Телефон',
+          title: 'Аватар',
           dataIndex: 'photoUrl',
           width: 165,
           render: (_, record) => (
-            <div
-              style={ {
-                display: 'flex',
-                width: '100px',
-                height: '100px',
-                alignItems: 'center',
-                justifyContent: 'center',
-              } }
+            <Avatar
+              size={ 50 }
+              src={ record.photoUrl }
             >
-              <img
-                alt={ record.photoUrl || 'image' }
-                src={ record.photoUrl ? record.photoUrl : undefined }
-                style={ {
-                  maxWidth: '100%',
-                  maxHeight: '100%',
-                  borderRadius: '50%',
-                } }
-              />
-            </div>
+              { (!record.photoUrl && record.firstName && record.lastName)
+                ? (`${record.firstName?.slice(0, 1)} ${record.lastName?.slice(0, 1)}`)
+                : null }
+            </Avatar>
           ),
         }] }
       />

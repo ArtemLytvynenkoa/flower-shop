@@ -28,7 +28,7 @@ const requiredRule = {
 
 const emailRule = {
   type: 'email',
-  message: 'Invalid Email',
+  message: 'Невалідний Email',
 };
 
 const getField = type => ({
@@ -55,12 +55,12 @@ export const getEmailField = ({
 }) => getInputField({
   formItemProps: {
     name: 'email',
-    label: isLabelVisible ? 'Email' : undefined,
+    label: isLabelVisible ? 'Пошта' : undefined,
     normalize: value => value.trim().toLowerCase(),
     rules: isRequired ? [emailRule, requiredRule] : [emailRule],
   },
   componentProps: {
-    placeholder: 'Email',
+    placeholder: 'Пошта',
     disabled,
     type: 'email',
     prefix: !isLabelVisible && <MailOutlined />,

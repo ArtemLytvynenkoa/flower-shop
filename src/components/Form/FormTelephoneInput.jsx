@@ -17,7 +17,7 @@ const FormTelephoneInput = ({
 
       // eslint-disable-next-line no-restricted-globals
       if (!value) {
-        return '+1';
+        return '+3';
       }
 
       try {
@@ -39,7 +39,7 @@ const FormTelephoneInput = ({
   >
     <Input
       disabled={ disabled }
-      placeholder="Phone Number"
+      placeholder="Номер Телефону"
       style={ { width: '100%' } }
     />
   </FormItem>

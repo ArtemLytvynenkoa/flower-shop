@@ -16,7 +16,7 @@ import {
 import { CloseOutlined } from '@ant-design/icons';
 import { LoadingIndicator } from 'components';
 
-const ProductImageUpload = ({ onChange, value }) => {
+const UserAvatarUpload = ({ onChange, value }) => {
   const [imageRef, setImageRef] = useState(null);
   const [isLoading, setIsloading] = useState(false);
   const [uploadFile, uploading, snapshot, error] = useUploadFile();
@@ -35,7 +35,7 @@ const ProductImageUpload = ({ onChange, value }) => {
             size="small"
             onClick={ async () => {
               setIsloading(true);
-              await deleteObject(imageRef || ref(storage, `images/goods/${value.name}`));
+              await deleteObject(imageRef || ref(storage, `images/users/${value.name}`));
               setIsloading(false);
               setImageRef(null);
               onChange(null);
@@ -52,12 +52,12 @@ const ProductImageUpload = ({ onChange, value }) => {
   return (
 
     <Upload
-      name="productImage"
+      name="userAvatar"
       accept="image/png, image/jpeg"
       showUploadList={ false }
       beforeUpload={ () => false }
       onChange={ async ({ file }) => {
-        const imageRef = ref(storage, `images/goods/${file.name}`);
+        const imageRef = ref(storage, `images/users/${file.name}`);
         setIsloading(true);
         await uploadFile(imageRef, file);
         const url = await getDownloadURL(imageRef);
@@ -79,4 +79,4 @@ const ProductImageUpload = ({ onChange, value }) => {
   );
 };
 
-export default ProductImageUpload;
+export default UserAvatarUpload;
