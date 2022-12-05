@@ -48,7 +48,7 @@ export const RightHeader = () => {
               <ShoppingCartOutlined />
             </Link>
           </Button>
-          { user.uid === 'Rdhlz2WT9MU9im8yLXTaASids352' &&
+          { user.uid === '1acziJACPzNsgxEkGQKMXmU9mSv1' &&
             <Dropdown
               trigger={ ['hover'] }
               overlay={
