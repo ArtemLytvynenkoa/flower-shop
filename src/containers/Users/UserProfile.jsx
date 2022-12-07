@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Button,
   Col,
   Divider,
@@ -24,7 +23,6 @@ import React, {
   useState,
 } from 'react';
 import {
-  useAuthState,
   useUpdateEmail,
   useUpdatePassword,
   useUpdateProfile,
@@ -37,7 +35,6 @@ import UserAvatarUpload from './UserAvatarUpload';
 const { Item } = AntdForm;
 
 const UserProfile = () => {
-  const [user, isLoading] = useAuthState(auth);
   const [isPasswordChangeVisible, setPasswordChangeVisible] = useState(false);
 
   const [form] = useForm();
@@ -52,7 +49,9 @@ const UserProfile = () => {
     doc(getFirestore(app), 'users', userId),
   );
 
-  console.log(value?.data());
+  const userData = value?.data();
+
+  form.setFieldsValue(userData);
 
   useEffect(() => {
     if (profileError) {
@@ -79,40 +78,32 @@ const UserProfile = () => {
       <Col span={ 5 }>
         <Form
           form={ form }
-          isLoading={ isLoading || isProfileUpdeting || isEmailUpdeting || loading }
-          initialValues={ {
-            name: user?.displayName,
-            email: user?.email,
-          } }
+          isLoading={ isProfileUpdeting || isEmailUpdeting || loading }
+          // initialValues={ {
+          //   name: user?.displayName,
+          //   email: user?.email,
+          // } }
           fields={ [
-            <Avatar
-              key="avatar"
-              shape="circle"
-              size={ 100 }
-              src={ user?.photoURL }
-            >
-              { !user?.photoURL ? user?.displayName : null }
-            </Avatar>,
             <Item key="userAvatar" name="photoURL" noStyle>
-              <UserAvatarUpload />
+              <UserAvatarUpload userName={ userData?.userName } />
             </Item>,
-            profileForm.name,
+            profileForm.userName,
             profileForm.email,
-            profileForm.userPhone,
+            profileForm.phoneNumber,
           ] }
           onSubmit={ async values => {
             await updateEmail(values.email);
             await updateProfile({
-              displayName: values.name,
-              photoURL: values.userAvatar.url,
+              displayName: values.userName,
+              photoURL: values?.photoURL?.url || null,
             });
             try {
               if (!profileError && !emailError) {
                 await updateUser({
                   email: values.email,
-                  phoneNumber: values.userPhone,
-                  userName: values.name,
-                  photoURL: values.userAvatar,
+                  phoneNumber: values.phoneNumber,
+                  userName: values.userName,
+                  photoURL: values.photoURL,
                 }, userId);
                 message.success('Готово');
               }

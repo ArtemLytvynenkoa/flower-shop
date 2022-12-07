@@ -50,9 +50,9 @@ export const confirmPass = getPassword({
   },
 });
 
-export const name = getInputField({
+export const userName = getInputField({
   formItemProps: {
-    name: 'name',
+    name: 'userName',
     required: true,
   },
   componentProps: {

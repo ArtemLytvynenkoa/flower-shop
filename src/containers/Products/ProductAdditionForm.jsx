@@ -78,15 +78,15 @@ const ProductAdditionForm = () => {
             <Button
               type="primary"
               onClick={ async () => {
+                setIsloading(true);
                 try {
-                  setIsloading(true);
-                  await deleteObject(ref(storage, `images/${goodsData.image.name}`));
+                  await deleteObject(ref(storage, `images/goods/${goodsData.image.name}`));
                   await deleteGood(goodId);
-                  setIsloading(false);
                   navigate(`${links.goods}`);
                 } catch (error) {
                   message.error(error.message);
                 }
+                setIsloading(false);
               } }
             >
               Видалити Товар
@@ -98,8 +98,8 @@ const ProductAdditionForm = () => {
             initialValues={ goodsData }
             buttonText={ !isNewGood ? 'Змінити' : 'Завантажити' }
             onSubmit={ async values => {
+              setIsloading(true);
               try {
-                setIsloading(true);
                 if (isNewGood) {
                   await setGood({
                     price: values.price,
@@ -120,11 +120,10 @@ const ProductAdditionForm = () => {
                   }, goodId);
                 }
                 message.success('Готово');
-                setIsloading(false);
               } catch (error) {
                 message.error(error.message);
-                setIsloading(false);
               }
+              setIsloading(false);
             } }
             fields={ [
               productAdditionFormFields.goodsName,

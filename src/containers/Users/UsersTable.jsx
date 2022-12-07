@@ -18,7 +18,6 @@ const UsersTable = () => {
   const [values, loading, error] = useCollectionData(
     collection(getFirestore(app), 'users'),
   );
-  console.log(values);
 
   return (
     <Space

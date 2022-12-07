@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
 import {
+  Avatar,
   Badge,
   Button,
   Image,
+  message,
+  Space,
   Upload,
 } from 'antd';
 import React, { useState } from 'react';
@@ -16,7 +19,7 @@ import {
 import { CloseOutlined } from '@ant-design/icons';
 import { LoadingIndicator } from 'components';
 
-const UserAvatarUpload = ({ onChange, value }) => {
+const UserAvatarUpload = ({ onChange, value, userName }) => {
   const [imageRef, setImageRef] = useState(null);
   const [isLoading, setIsloading] = useState(false);
   const [uploadFile, uploading, snapshot, error] = useUploadFile();
@@ -35,16 +38,28 @@ const UserAvatarUpload = ({ onChange, value }) => {
             size="small"
             onClick={ async () => {
               setIsloading(true);
-              await deleteObject(imageRef || ref(storage, `images/users/${value.name}`));
+              try {
+                await deleteObject(imageRef || ref(storage, `images/users/${value.name}`));
+                setImageRef(null);
+                onChange(null);
+              } catch (error) {
+                message.error(error.message);
+              }
               setIsloading(false);
-              setImageRef(null);
-              onChange(null);
             } }
           />
         }
         offset={ [-12, 0] }
       >
-        <Image src={ value?.url } />
+        <Image
+          src={ value?.url }
+          style={ {
+            borderRadius: '50%',
+            objectFit: 'cover',
+          } }
+          width={ 200 }
+          height={ 200 }
+        />
       </Badge>
     );
   }
@@ -57,24 +72,38 @@ const UserAvatarUpload = ({ onChange, value }) => {
       showUploadList={ false }
       beforeUpload={ () => false }
       onChange={ async ({ file }) => {
-        const imageRef = ref(storage, `images/users/${file.name}`);
+        const imageRef = ref(storage, `images/users/${file.name}-${file.name}`);
         setIsloading(true);
-        await uploadFile(imageRef, file);
-        const url = await getDownloadURL(imageRef);
-        setImageRef(imageRef);
-        onChange({
-          url,
-          name: file.name,
-        });
+        try {
+          await uploadFile(imageRef, file);
+          const url = await getDownloadURL(imageRef);
+          setImageRef(imageRef);
+          onChange({
+            url,
+            name: `${file.name}-${file.name}`,
+          });
+        } catch (error) {
+          message.error(error.message);
+        }
         setIsloading(false);
       } }
     >
-      <Button
-        type="primary"
-        loading={ uploading }
-      >
-        Завантажити фото
-      </Button>
+      <Space direction="vertical">
+        <Avatar
+          key="avatar"
+          shape="circle"
+          size={ 200 }
+          src={ value?.photoURL?.url }
+        >
+          { !value?.photoURL?.url ? userName : null }
+        </Avatar>
+        <Button
+          type="primary"
+          loading={ uploading }
+        >
+          Завантажити фото
+        </Button>
+      </Space>
     </Upload>
   );
 };

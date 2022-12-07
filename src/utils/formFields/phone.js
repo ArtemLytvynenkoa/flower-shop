@@ -19,7 +19,7 @@ export const phone = ({
   },
 });
 
-export const userPhone = phone({
+export const phoneNumber = phone({
   disabled: false,
-  name: 'userPhone',
+  name: 'phoneNumber',
 });
