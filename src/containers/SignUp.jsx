@@ -17,6 +17,7 @@ import {
 import {
   auth,
   setUser,
+  app,
 } from 'fire';
 import {
   useAuthState,
@@ -24,12 +25,20 @@ import {
   useSignInWithGoogle,
 } from 'react-firebase-hooks/auth';
 import errorMessages from 'errorMessages';
+import {
+  collection, getFirestore,
+} from 'firebase/firestore';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 const SignUp = () => {
   const [user, loading] = useAuthState(auth);
 
   const [createUserWithEmailAndPassword,, isUserLoading, error] = useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle,, isGoogleUserLoading, googleSignInError] = useSignInWithGoogle(auth);
+
+  const [values, isCollectionloading] = useCollectionData(
+    collection(getFirestore(app), 'users'),
+  );
 
   useEffect(() => {
     if (error) {
@@ -49,12 +58,14 @@ const SignUp = () => {
   }
 
   if (user) {
-    setUser({
-      uid: user.uid,
-      email: user.email,
-      phoneNumber: user.phoneNumber,
-      photoURL: user.photoURL,
-    });
+    const isExistingUser = values?.find(({ uid }) => uid === user.uid);
+    if (!isExistingUser) {
+      setUser({
+        uid: user.uid,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+      });
+    }
 
     return <Navigate to={ links.main } replace />;
   }

@@ -3,6 +3,7 @@ import {
   Badge,
   Button,
   Image,
+  message,
   Upload,
 } from 'antd';
 import React, { useState } from 'react';
@@ -25,7 +26,7 @@ const ProductImageUpload = ({ onChange, value }) => {
     return <LoadingIndicator />;
   }
 
-  if (value) {
+  if (value?.url) {
     return (
       <Badge
         count={
@@ -35,16 +36,20 @@ const ProductImageUpload = ({ onChange, value }) => {
             size="small"
             onClick={ async () => {
               setIsloading(true);
-              await deleteObject(imageRef);
+              try {
+                await deleteObject(imageRef || ref(storage, `images/goods/${value.name}`));
+                setImageRef(null);
+                onChange(null);
+              } catch (error) {
+                message.error(error.message);
+              }
               setIsloading(false);
-              setImageRef(null);
-              onChange(null);
             } }
           />
         }
         offset={ [-12, 0] }
       >
-        <Image src={ value } />
+        <Image src={ value?.url } />
       </Badge>
     );
   }
@@ -57,12 +62,19 @@ const ProductImageUpload = ({ onChange, value }) => {
       showUploadList={ false }
       beforeUpload={ () => false }
       onChange={ async ({ file }) => {
-        const imageRef = (ref(storage, `images/${file.name}-${file.uid}`));
+        const imageRef = ref(storage, `images/goods/${file.name}-${file.uid}`);
         setIsloading(true);
-        await uploadFile(imageRef, file);
-        const url = await getDownloadURL(imageRef);
-        setImageRef(imageRef);
-        onChange(url);
+        try {
+          await uploadFile(imageRef, file);
+          const url = await getDownloadURL(imageRef);
+          setImageRef(imageRef);
+          onChange({
+            url,
+            name: `${file.name}-${file.uid}`,
+          });
+        } catch (error) {
+          message.error(error.message);
+        }
         setIsloading(false);
       } }
     >

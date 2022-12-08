@@ -12,9 +12,12 @@ import {
   MainPage,
   SignIn,
   SignUp,
-  UserProfile,
+  User,
   Product,
   Products,
+  Orders,
+  Users,
+  Basket,
 } from 'containers';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'fire';
@@ -35,23 +38,39 @@ export const routes = {
     },
   },
   private: {
-    profile: {
-      path: links.profile,
-      component: UserProfile,
+    busket: {
+      path: links.basket,
+      component: Basket,
     },
     goods: {
       path: links.goods,
       component: Products,
       children: {
         good: {
-          path: '/:productId',
+          path: '/:goodId',
           component: Product,
         },
       },
     },
-    productAdditionForm: {
-      path: links.productAdditionForm,
-      component: Product,
+    orders: {
+      path: links.orders,
+      component: Orders,
+      // children: {
+      //   good: {
+      //     path: '/:orderId',
+      //     component: Order,
+      //   },
+      // },
+    },
+    users: {
+      path: links.users,
+      component: Users,
+      children: {
+        user: {
+          path: '/:userId',
+          component: User,
+        },
+      },
     },
   },
 };

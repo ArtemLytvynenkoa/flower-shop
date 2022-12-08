@@ -1,14 +1,14 @@
 import {
-  name,
+  userName,
   email,
   password,
   confirmPass,
-  phone,
   goodsName,
   productCode,
 } from './input';
 import { price } from './number';
 import { description } from './textArea';
+import { phoneNumber } from './phone';
 
 const signInForm = {
   email,
@@ -16,8 +16,8 @@ const signInForm = {
 };
 
 const profileForm = {
-  name,
-  phone,
+  userName,
+  phoneNumber,
   email,
   password,
   confirmPass,

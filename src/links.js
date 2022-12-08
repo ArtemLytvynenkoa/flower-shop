@@ -4,9 +4,8 @@ export default {
   signIn: '/signIn',
   signUp: '/signUp',
   // private
-  profile: '/profile',
-  productAdditionForm: '/productAdditionForm',
   goods: '/goods',
   orders: '/orders',
   users: '/users',
+  basket: '/basket',
 };

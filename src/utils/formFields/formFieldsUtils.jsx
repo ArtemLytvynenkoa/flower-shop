@@ -1,6 +1,6 @@
 import { MailOutlined } from '@ant-design/icons';
 import { parsePhoneNumber } from 'libphonenumber-js';
-import formComponentType from 'formComponentType';
+import formComponentTypes from 'formComponentTypes';
 import React from 'react';
 
 // rules
@@ -28,7 +28,7 @@ const requiredRule = {
 
 const emailRule = {
   type: 'email',
-  message: 'Invalid Email',
+  message: 'Невалідний Email',
 };
 
 const getField = type => ({
@@ -43,9 +43,9 @@ const getField = type => ({
   type,
 });
 
-export const getInputField = getField(formComponentType.INPUT);
+export const getInputField = getField(formComponentTypes.INPUT);
 
-export const getPassword = getField(formComponentType.PASSWORD);
+export const getPassword = getField(formComponentTypes.PASSWORD);
 
 export const getEmailField = ({
   isLabelVisible,
@@ -55,12 +55,12 @@ export const getEmailField = ({
 }) => getInputField({
   formItemProps: {
     name: 'email',
-    label: isLabelVisible ? 'Email' : undefined,
+    label: isLabelVisible ? 'Пошта' : undefined,
     normalize: value => value.trim().toLowerCase(),
     rules: isRequired ? [emailRule, requiredRule] : [emailRule],
   },
   componentProps: {
-    placeholder: 'Email',
+    placeholder: 'Пошта',
     disabled,
     type: 'email',
     prefix: !isLabelVisible && <MailOutlined />,
@@ -68,18 +68,18 @@ export const getEmailField = ({
   },
 });
 
-export const getTextAreaField = getField(formComponentType.TEXTAREA);
+export const getTextAreaField = getField(formComponentTypes.TEXTAREA);
 
-export const getRadioButtonGroupField = getField(formComponentType.RADIOBUTTONGROUP);
+export const getRadioButtonGroupField = getField(formComponentTypes.RADIOBUTTONGROUP);
 
-export const getNumberField = getField(formComponentType.NUMBER);
+export const getNumberField = getField(formComponentTypes.NUMBER);
 
-export const getDatePickerField = getField(formComponentType.DATE);
+export const getDatePickerField = getField(formComponentTypes.DATE);
 
-export const getSelectField = getField(formComponentType.SELECT);
+export const getSelectField = getField(formComponentTypes.SELECT);
 
-export const getCheckboxField = getField(formComponentType.CHECKBOX);
+export const getCheckboxField = getField(formComponentTypes.CHECKBOX);
 
-export const getPhoneField = getField(formComponentType.PHONE);
+export const getPhoneField = getField(formComponentTypes.PHONE);
 
-export const getUploadField = getField(formComponentType.UPLOAD);
+export const getUploadField = getField(formComponentTypes.UPLOAD);

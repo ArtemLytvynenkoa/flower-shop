@@ -17,7 +17,7 @@ import {
   // FormSwitch,
 } from 'components';
 import { isFieldDisabled } from 'utils';
-import formComponentType from 'formComponentType';
+import formComponentTypes from 'formComponentTypes';
 import React from 'react';
 
 const { Item } = Form;
@@ -49,37 +49,37 @@ const renderFormFields = fields => fields.map((field, index) => {
           const disabled = isFieldDisabled(field, getFieldValue);
 
           switch (field.type) {
-            case formComponentType.INPUT:
+            case formComponentTypes.INPUT:
               return <FormInput field={ field } disabled={ disabled } />;
 
-            case formComponentType.TEXTAREA:
+            case formComponentTypes.TEXTAREA:
               return <FormTextArea field={ field } disabled={ disabled } />;
 
-            case formComponentType.DATE:
+            case formComponentTypes.DATE:
               return <FormDatePicker field={ field } disabled={ disabled } />;
 
-            case formComponentType.NUMBER:
+            case formComponentTypes.NUMBER:
               return <FormInputNumber field={ field } disabled={ disabled } />;
 
-            case formComponentType.SELECT:
+            case formComponentTypes.SELECT:
               return <FormSelect field={ field } disabled={ disabled } />;
 
-            case formComponentType.PASSWORD:
+            case formComponentTypes.PASSWORD:
               return <FormInput field={ field } disabled={ disabled } />;
 
-            case formComponentType.CHECKBOX:
+            case formComponentTypes.CHECKBOX:
               return <FormCheckbox field={ field } disabled={ disabled } />;
 
-              // case FormComponentType.SWITCH:
+              // case FormComponentTypes.SWITCH:
               //   return <FormSwitch field={ field } disabled={ disabled } />;
 
-            case formComponentType.PHONE:
+            case formComponentTypes.PHONE:
               return <FormTelephoneInput field={ field } disabled={ disabled } />;
 
-            case formComponentType.UPLOAD:
+            case formComponentTypes.UPLOAD:
               return <FormUpload field={ field } />;
 
-            case formComponentType.RADIOBUTTONGROUP:
+            case formComponentTypes.RADIOBUTTONGROUP:
               return <FormRadioButtonGroup field={ field } disabled={ disabled } />;
 
             default:
