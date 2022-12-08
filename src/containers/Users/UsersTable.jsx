@@ -34,6 +34,24 @@ const UsersTable = () => {
         dataSource={ values }
         loading={ loading }
         columns={ [{
+          title: 'Аватар',
+          dataIndex: 'photoURL',
+          width: 165,
+          render: (_, record) => (
+            <Avatar
+              size={ 50 }
+              src={ record?.photoURL?.url }
+            >
+              { (!record?.photoURL?.url && record?.userName)
+                ? (`${record.userName}`)
+                : null }
+            </Avatar>
+          ),
+        }, {
+          title: 'Ім`я користувача',
+          dataIndex: 'userName',
+          width: 165,
+        }, {
           title: 'Електронна пошта',
           dataIndex: 'email',
           width: 165,
@@ -41,20 +59,6 @@ const UsersTable = () => {
           title: 'Телефон',
           dataIndex: 'phoneNumber',
           width: 165,
-        }, {
-          title: 'Аватар',
-          dataIndex: 'photoUrl',
-          width: 165,
-          render: (_, record) => (
-            <Avatar
-              size={ 50 }
-              src={ record.photoUrl }
-            >
-              { (!record.photoUrl && record.firstName && record.lastName)
-                ? (`${record.firstName?.slice(0, 1)} ${record.lastName?.slice(0, 1)}`)
-                : null }
-            </Avatar>
-          ),
         }] }
       />
     </Space>

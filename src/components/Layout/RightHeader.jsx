@@ -15,6 +15,7 @@ import links from 'links';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import admins from 'admins';
 
 export const RightHeader = () => {
   const [user] = useAuthState(auth);
@@ -48,7 +49,7 @@ export const RightHeader = () => {
               <ShoppingCartOutlined />
             </Link>
           </Button>
-          { user.uid === '1acziJACPzNsgxEkGQKMXmU9mSv1' &&
+          { admins.includes(user.uid) &&
             <Dropdown
               trigger={ ['hover'] }
               overlay={

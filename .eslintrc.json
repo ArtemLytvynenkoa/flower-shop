@@ -72,6 +72,9 @@
         ], [
           "errorMessages",
           "./src/errorMessages"
+        ], [
+          "admins",
+          "./src/adminsUID"
         ]],
         "extensions": [
           ".js",

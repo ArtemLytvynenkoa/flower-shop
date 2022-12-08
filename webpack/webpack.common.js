@@ -18,6 +18,7 @@ const config = {
       formComponentTypes: path.resolve(ROOT_PATH, './src/formComponentTypes'),
       fire: path.resolve(ROOT_PATH, './src/firebase'),
       errorMessages: path.resolve(ROOT_PATH, './src/errorMessages'),
+      admins: path.resolve(ROOT_PATH, './src/adminsUID'),
     },
   },
   entry: {
