@@ -17,6 +17,7 @@ import {
   Products,
   Orders,
   Users,
+  Basket,
 } from 'containers';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from 'fire';
@@ -37,6 +38,10 @@ export const routes = {
     },
   },
   private: {
+    busket: {
+      path: links.basket,
+      component: Basket,
+    },
     goods: {
       path: links.goods,
       component: Products,

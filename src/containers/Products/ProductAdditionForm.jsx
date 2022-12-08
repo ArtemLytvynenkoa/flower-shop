@@ -138,7 +138,8 @@ const ProductAdditionForm = () => {
                 name="image"
                 key="image"
                 rules={ [{
-                  required: true, message: 'Завантажте фото',
+                  required: true,
+                  message: 'Завантажте фото',
                 }] }
               >
                 <ProductImageUpload />
