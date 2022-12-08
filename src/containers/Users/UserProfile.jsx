@@ -72,7 +72,10 @@ const UserProfile = () => {
   return (
     <Row
       justify="center"
-      style={ { height: '100%' } }
+      style={ {
+        height: '100%',
+        textAlign: 'center',
+      } }
       align="middle"
     >
       <Col span={ 5 }>

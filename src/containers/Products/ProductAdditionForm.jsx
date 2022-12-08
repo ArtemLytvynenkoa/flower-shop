@@ -32,6 +32,7 @@ import {
   deleteObject,
   ref,
 } from 'firebase/storage';
+import { LeftOutlined } from '@ant-design/icons';
 import ProductImageUpload from './ProductImageUpload';
 
 const { Item } = AntdForm;
@@ -66,12 +67,14 @@ const ProductAdditionForm = () => {
           size={ 20 }
           style={ { width: '100%' } }
         >
-          <Space>
+          <Space size={ 30 }>
             <Button
               type="link"
               style={ { padding: '0px' } }
             >
               <Link to={ links.goods }>
+                <LeftOutlined />
+                { ' ' }
                 До таблиці
               </Link>
             </Button>
