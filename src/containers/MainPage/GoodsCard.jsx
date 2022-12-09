@@ -1,18 +1,14 @@
 /* eslint-disable react/prop-types */
-import {
-  doc,
-  getFirestore,
-} from 'firebase/firestore';
 import React from 'react';
-import { useDocument } from 'react-firebase-hooks/firestore';
 import {
-  app,
   auth,
+  addingGoodToUsersBasket,
 } from 'fire';
 import {
   Button,
   Col,
   Image,
+  message,
   Space,
   Typography,
 } from 'antd';
@@ -23,10 +19,6 @@ import links from 'links';
 const { Text } = Typography;
 
 const GoodsCard = ({ good }) => {
-  const [value, loading, error] = useDocument(
-    doc(getFirestore(app), 'goods', good.id),
-  );
-
   const [user, isUserLoading] = useAuthState(auth);
 
   const navigate = useNavigate();
@@ -54,14 +46,23 @@ const GoodsCard = ({ good }) => {
           onClick={ async () => {
             if (!user) {
               navigate(links.signIn);
+            } else {
+              try {
+                addingGoodToUsersBasket(
+                  {
+                    ...good,
+                    uid: user.uid,
+                    quantity: 1,
+                    fullPrice: good.price,
+                  },
+                  user.uid,
+                  good.id,
+                );
+                message.success('Додано до корзини');
+              } catch (error) {
+                message.error(error.message);
+              }
             }
-            // else {
-            //   try {
-            //     setOrder();
-            //   } catch (error) {
-
-            //   }
-            // }
           } }
         >
           Додати в корзину

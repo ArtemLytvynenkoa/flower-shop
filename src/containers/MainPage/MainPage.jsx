@@ -26,7 +26,7 @@ const MainPage = () => {
         padding: '20px',
       } }
     >
-      { values.map(value => <GoodsCard good={ value } key={ value.id } />) }
+      { values?.map(value => <GoodsCard good={ value } key={ value.id } />) }
     </Row>
   );
 };

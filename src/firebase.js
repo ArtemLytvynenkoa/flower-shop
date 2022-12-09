@@ -44,6 +44,18 @@ export const updateUser = async (data, id) => {
   await updateDoc(doc(usersRef, id), data);
 };
 
+export const addingGoodToUsersBasket = async (data, uid, goodId) => {
+  await setDoc(doc(collection(db, `users/${uid}/basket`), goodId), data);
+};
+
+export const updateGoodFromUsersBasket = async (data, uid, goodId) => {
+  await updateDoc(doc(collection(db, `users/${uid}/basket`), goodId), data);
+};
+
+export const deleteGoodFromUsersBasket = async (uid, goodId) => {
+  await deleteDoc(doc(db, `users/${uid}/basket`, goodId));
+};
+
 export const setGood = async data => {
   await setDoc(doc(goodsRef, data.id), data);
 };
