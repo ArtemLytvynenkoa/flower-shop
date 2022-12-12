@@ -7,7 +7,7 @@ import {
   doc,
   updateDoc,
   deleteDoc,
-} from 'firebase/firestore/lite';
+} from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 // TODO: Add SDKs for Firebase products that you want to use
@@ -34,7 +34,12 @@ export const auth = getAuth(app);
 
 export const goodsRef = collection(db, 'goods');
 export const usersRef = collection(db, 'users');
-export const ordersRef = collection(db, 'orders');
+
+export const getBasketRef = uid => collection(db, `users/${uid}/basket`);
+export const getOrderRef = uid => collection(db, `users/${uid}/orders`);
+export const getBasketGoodRef = (uid, goodId) => doc(db, `users/${uid}/basket`, goodId);
+export const getGoodRef = goodId => doc(getFirestore(app), 'goods', goodId);
+export const getUsserRef = userId => doc(getFirestore(app), 'users', userId);
 
 export const setUser = async data => {
   await setDoc(doc(usersRef, data.uid), data);
@@ -45,19 +50,19 @@ export const updateUser = async (data, id) => {
 };
 
 export const addingGoodToUsersBasket = async (data, uid, goodId) => {
-  await setDoc(doc(collection(db, `users/${uid}/basket`), goodId), data);
+  await setDoc(doc(getBasketRef(uid), goodId), data);
 };
 
 export const updateGoodFromUsersBasket = async (data, uid, goodId) => {
-  await updateDoc(doc(collection(db, `users/${uid}/basket`), goodId), data);
+  await updateDoc(doc(getBasketRef(uid), goodId), data);
 };
 
 export const deleteGoodFromUsersBasket = async (uid, goodId) => {
-  await deleteDoc(doc(db, `users/${uid}/basket`, goodId));
+  await deleteDoc(getBasketGoodRef(uid, goodId));
 };
 
 export const createOrder = async (data, uid, orderId) => {
-  await setDoc(doc(collection(db, `users/${uid}/orders`), orderId), data);
+  await setDoc(doc(getOrderRef(uid), orderId), data);
 };
 
 export const setGood = async data => {
@@ -70,8 +75,4 @@ export const updateGood = async (data, id) => {
 
 export const deleteGood = async id => {
   await deleteDoc(doc(goodsRef, id));
-};
-
-export const setOrder = async data => {
-  await setDoc(doc(ordersRef), data);
 };

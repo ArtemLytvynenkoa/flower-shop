@@ -12,12 +12,8 @@ import errorMessages from 'errorMessages';
 import {
   auth,
   updateUser,
-  app,
+  getUsserRef,
 } from 'fire';
-import {
-  doc,
-  getFirestore,
-} from 'firebase/firestore';
 import React, {
   useEffect,
   useState,
@@ -46,7 +42,7 @@ const UserProfile = () => {
   const { userId } = useParams();
 
   const [value, loading, error] = useDocument(
-    doc(getFirestore(app), 'users', userId),
+    getUsserRef(userId),
   );
 
   const userData = value?.data();

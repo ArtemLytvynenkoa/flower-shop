@@ -12,10 +12,10 @@ import {
 } from 'antd';
 import {
   setGood,
-  app,
   updateGood,
   deleteGood,
   storage,
+  getGoodRef,
 } from 'fire';
 import {
   Link,
@@ -23,10 +23,6 @@ import {
   useParams,
 } from 'react-router-dom';
 import { useDocument } from 'react-firebase-hooks/firestore';
-import {
-  doc,
-  getFirestore,
-} from 'firebase/firestore';
 import links from 'links';
 import {
   deleteObject,
@@ -39,6 +35,7 @@ const { Item } = AntdForm;
 
 const ProductAdditionForm = () => {
   const [form] = useForm();
+
   const [isLoading, setIsloading] = useState(false);
 
   const { goodId } = useParams();
@@ -46,7 +43,7 @@ const ProductAdditionForm = () => {
   const isNewGood = goodId === 'new';
 
   const [value, loading, error] = useDocument(
-    doc(getFirestore(app), 'goods', goodId),
+    getGoodRef(goodId),
   );
 
   const goodsData = value?.data();

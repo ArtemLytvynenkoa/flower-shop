@@ -17,7 +17,7 @@ import {
 import {
   auth,
   setUser,
-  app,
+  usersRef,
 } from 'fire';
 import {
   useAuthState,
@@ -25,9 +25,6 @@ import {
   useSignInWithGoogle,
 } from 'react-firebase-hooks/auth';
 import errorMessages from 'errorMessages';
-import {
-  collection, getFirestore,
-} from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 const SignUp = () => {
@@ -37,7 +34,7 @@ const SignUp = () => {
   const [signInWithGoogle,, isGoogleUserLoading, googleSignInError] = useSignInWithGoogle(auth);
 
   const [values, isCollectionloading] = useCollectionData(
-    collection(getFirestore(app), 'users'),
+    usersRef,
   );
 
   useEffect(() => {

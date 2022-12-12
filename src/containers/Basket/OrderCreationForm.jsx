@@ -9,23 +9,23 @@ import React, { useState } from 'react';
 import { orderForm } from 'utils';
 import { useDocument } from 'react-firebase-hooks/firestore';
 import {
-  doc,
-  getFirestore,
-} from 'firebase/firestore';
-import {
-  app,
   createOrder,
   deleteGoodFromUsersBasket,
+  auth,
+  getUsserRef,
 } from 'fire';
 import { useForm } from 'antd/lib/form/Form';
 import { useNavigate } from 'react-router-dom';
 import links from 'links';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
-const OrderCreationForm = ({ user, basket }) => {
+const OrderCreationForm = ({ basket }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [user, isLoading] = useAuthState(auth);
+
   const [value, loading, error] = useDocument(
-    doc(getFirestore(app), 'users', user.uid),
+    getUsserRef(user.uid),
   );
 
   const [form] = useForm();

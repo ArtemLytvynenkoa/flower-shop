@@ -1,10 +1,6 @@
-import {
-  collection,
-  getFirestore,
-} from 'firebase/firestore';
 import React from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { app } from 'fire';
+import { usersRef } from 'fire';
 import {
   Avatar,
   Button,
@@ -16,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 const UsersTable = () => {
   const [values, loading, error] = useCollectionData(
-    collection(getFirestore(app), 'users'),
+    usersRef,
   );
 
   return (

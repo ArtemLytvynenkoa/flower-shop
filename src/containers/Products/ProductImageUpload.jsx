@@ -20,6 +20,7 @@ import { LoadingIndicator } from 'components';
 const ProductImageUpload = ({ onChange, value }) => {
   const [imageRef, setImageRef] = useState(null);
   const [isLoading, setIsloading] = useState(false);
+
   const [uploadFile, uploading, snapshot, error] = useUploadFile();
 
   if (isLoading && !value) {

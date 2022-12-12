@@ -1,17 +1,13 @@
 import { Row } from 'antd';
 import React from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { app } from 'fire';
+import { goodsRef } from 'fire';
 import { LoadingIndicator } from 'components';
-import {
-  getFirestore,
-  collection,
-} from 'firebase/firestore';
 import GoodsCard from './GoodsCard';
 
 const MainPage = () => {
   const [values, loading, error] = useCollectionData(
-    collection(getFirestore(app), 'goods'),
+    goodsRef,
   );
 
   if (loading) {

@@ -1,10 +1,6 @@
-import {
-  collection,
-  getFirestore,
-} from 'firebase/firestore';
 import React from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { app } from 'fire';
+import { goodsRef } from 'fire';
 import {
   Button,
   Space,
@@ -15,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 const ProductsTable = () => {
   const [values, loading, error] = useCollectionData(
-    collection(getFirestore(app), 'goods'),
+    goodsRef,
   );
 
   return (

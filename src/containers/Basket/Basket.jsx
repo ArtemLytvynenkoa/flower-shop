@@ -2,13 +2,9 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import {
   auth,
-  app,
+  getBasketRef,
 } from 'fire';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import {
-  collection,
-  getFirestore,
-} from 'firebase/firestore';
 import {
   message,
   Row,
@@ -23,7 +19,7 @@ import OrderCreationForm from './OrderCreationForm';
 const Basket = () => {
   const [user, isLoading] = useAuthState(auth);
   const [values, loading, error] = useCollectionData(
-    collection(getFirestore(app), `users/${user.uid}/basket`),
+    getBasketRef(user.uid),
   );
 
   if (isLoading || loading) {
@@ -44,7 +40,7 @@ const Basket = () => {
         textAlign: 'center',
       } }
     >
-      <OrderCreationForm user={ user } basket={ values } />
+      <OrderCreationForm basket={ values } />
       <Row
         gutter={ [16, 16] }
         style={ {

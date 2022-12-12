@@ -22,6 +22,7 @@ import { LoadingIndicator } from 'components';
 const UserAvatarUpload = ({ onChange, value, userName }) => {
   const [imageRef, setImageRef] = useState(null);
   const [isLoading, setIsloading] = useState(false);
+
   const [uploadFile, uploading, snapshot, error] = useUploadFile();
 
   if (isLoading && !value) {
