@@ -84,3 +84,14 @@ export const productCode = getInputField({
     disabled: false,
   },
 });
+
+export const deliveryAddress = getInputField({
+  formItemProps: {
+    name: 'deliveryAddress',
+    required: true,
+  },
+  componentProps: {
+    placeholder: 'Введіть адресу досставки',
+    disabled: false,
+  },
+});

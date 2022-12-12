@@ -10,11 +10,15 @@ import {
   getFirestore,
 } from 'firebase/firestore';
 import {
-  Button,
-  Row, Space,
+  message,
+  Row,
+  Space,
 } from 'antd';
 import { LoadingIndicator } from 'components';
+import { Navigate } from 'react-router-dom';
+import links from 'links';
 import BasketGoodsCard from './BasketGoodsCard';
+import OrderCreationForm from './OrderCreationForm';
 
 const Basket = () => {
   const [user, isLoading] = useAuthState(auth);
@@ -26,6 +30,12 @@ const Basket = () => {
     return <LoadingIndicator />;
   }
 
+  if (values.length === 0) {
+    message.warning('Корзина пуста!');
+
+    return <Navigate to={ links.main } />;
+  }
+
   return (
     <Space
       direction="vertical"
@@ -34,11 +44,7 @@ const Basket = () => {
         textAlign: 'center',
       } }
     >
-      <Button
-        type="primary"
-      >
-        Зробити замовлення
-      </Button>
+      <OrderCreationForm user={ user } basket={ values } />
       <Row
         gutter={ [16, 16] }
         style={ {

@@ -5,10 +5,21 @@ import {
   confirmPass,
   goodsName,
   productCode,
+  deliveryAddress,
 } from './input';
-import { price } from './number';
+import {
+  price,
+  orderPrice,
+} from './number';
 import { description } from './textArea';
 import { phoneNumber } from './phone';
+
+const orderForm = {
+  userName,
+  phoneNumber,
+  deliveryAddress,
+  orderPrice,
+};
 
 const signInForm = {
   email,
@@ -34,4 +45,5 @@ export {
   signInForm,
   profileForm,
   productAdditionFormFields,
+  orderForm,
 };
