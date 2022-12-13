@@ -1,21 +1,21 @@
-import {
-  collection,
-  getFirestore,
-} from 'firebase/firestore';
 import React from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { app } from 'fire';
 import {
-  Button,
+  auth,
+  ordersRef,
+} from 'fire';
+import {
   Space,
   Table,
+  Tag,
 } from 'antd';
-import links from 'links';
-import { Link } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import moment from 'moment-timezone';
 
 const OrdersTable = () => {
+  const [user, isUserLoading] = useAuthState(auth);
   const [values, loading, error] = useCollectionData(
-    collection(getFirestore(app), 'orders'),
+    ordersRef,
   );
 
   return (
@@ -24,14 +24,58 @@ const OrdersTable = () => {
       size={ 20 }
       style={ { width: '100%' } }
     >
-      <Button type="primary">
-        <Link to={ `${links.orders}/new` }>
-          Створити нове замовлення
-        </Link>
-      </Button>
       <Table
         dataSource={ values }
-        loading={ loading }
+        loading={ loading || isUserLoading }
+        scroll={ { y: 'calc(100vh - 15rem)' } }
+        columns={ [{
+          title: 'Order ID',
+          dataIndex: 'orderId',
+          width: 165,
+        }, {
+          title: 'User ID',
+          dataIndex: 'userId',
+          width: 165,
+        }, {
+          title: 'Ціна Замовлення',
+          dataIndex: 'orderPrice',
+          width: 165,
+        }, {
+          title: 'Статус Замовлення',
+          dataIndex: 'status',
+          width: 165,
+        }, {
+          title: 'Дата Замовлення',
+          dataIndex: 'orderCreationDate',
+          width: 165,
+          render: value => (
+            <div>
+              { moment(Number(value)).format('DD/MM/YYYY') }
+            </div>
+          ),
+        }, {
+          title: 'Замовлені Товари',
+          dataIndex: 'goods',
+          width: 165,
+          render: (_, record) => (
+            <Space
+              style={ { width: '100%' } }
+            >
+              { record.goods.map((item, index) => (
+                <Tag
+                  // eslint-disable-next-line react/no-array-index-key
+                  key={ `${record.orderId}${index}` }
+                  color={ (index % 2) ? 'rgb(41, 55, 70)' : undefined }
+                >
+                  <Space direction="vertical">
+                    { `Код товару: ${item.productCode}` }
+                    { `Назва товару: ${item.goodsName}` }
+                  </Space>
+                </Tag>
+              )) }
+            </Space>
+          ),
+        }] }
       />
     </Space>
   );

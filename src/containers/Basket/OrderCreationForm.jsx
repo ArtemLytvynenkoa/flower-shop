@@ -9,15 +9,17 @@ import React, { useState } from 'react';
 import { orderForm } from 'utils';
 import { useDocument } from 'react-firebase-hooks/firestore';
 import {
-  createOrder,
+  createUserOrder,
   deleteGoodFromUsersBasket,
   auth,
   getUserRef,
+  createOrder,
 } from 'fire';
 import { useForm } from 'antd/lib/form/Form';
 import { useNavigate } from 'react-router-dom';
 import links from 'links';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import orderStatuses from 'orderStatuses';
 
 const OrderCreationForm = ({ basket }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -68,16 +70,31 @@ const OrderCreationForm = ({ basket }) => {
           onSubmit={ async values => {
             try {
               const orderCreationDate = new Date().getTime().toString();
+              const orderId = `${user.uid}-${values.orderPrice}-${orderCreationDate}`;
 
-              await createOrder(
+              await createUserOrder(
                 {
                   goods: basket,
                   orderCreationDate,
                   orderPrice: values.orderPrice,
+                  userId: user.uid,
+                  orderId,
+                  status: orderStatuses.NEW,
+                  deliveryAddress: values.deliveryAddress,
                 },
                 user.uid,
-                `${user.uid}-${values.orderPrice}-${orderCreationDate}`,
+                orderId,
               );
+
+              await createOrder({
+                goods: basket,
+                orderCreationDate,
+                orderPrice: values.orderPrice,
+                userId: user.uid,
+                orderId,
+                status: orderStatuses.NEW,
+                deliveryAddress: values.deliveryAddress,
+              });
 
               basket.forEach(async ({ id }) => {
                 await deleteGoodFromUsersBasket(user.uid, id);

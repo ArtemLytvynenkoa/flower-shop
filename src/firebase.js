@@ -34,6 +34,7 @@ export const auth = getAuth(app);
 
 export const goodsRef = collection(db, 'goods');
 export const usersRef = collection(db, 'users');
+export const ordersRef = collection(db, 'orders');
 
 export const getBasketRef = uid => collection(db, `users/${uid}/basket`);
 export const getOrderRef = uid => collection(db, `users/${uid}/orders`);
@@ -61,8 +62,12 @@ export const deleteGoodFromUsersBasket = async (uid, goodId) => {
   await deleteDoc(getBasketGoodRef(uid, goodId));
 };
 
-export const createOrder = async (data, uid, orderId) => {
+export const createUserOrder = async (data, uid, orderId) => {
   await setDoc(doc(getOrderRef(uid), orderId), data);
+};
+
+export const createOrder = async data => {
+  await setDoc(doc(ordersRef, data.orderId), data);
 };
 
 export const setGood = async data => {

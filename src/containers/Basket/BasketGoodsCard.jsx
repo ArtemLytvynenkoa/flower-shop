@@ -48,7 +48,10 @@ const BasketGoodsCard = ({ good }) => {
           onChange={ async value => {
             setIsLoading(true);
             try {
-              await updateGoodFromUsersBasket({ quantity: value }, user.uid, good.id);
+              await updateGoodFromUsersBasket({
+                quantity: value,
+                fullPrice: value * good.price,
+              }, user.uid, good.id);
             } catch (error) {
               message.error(error.message);
             }
@@ -58,7 +61,8 @@ const BasketGoodsCard = ({ good }) => {
         <Text>
           Повна ціна:
           { ' ' }
-          { good.price * good.quantity }
+          { good.fullPrice }
+          ₴
         </Text>
         <Button
           type="primary"

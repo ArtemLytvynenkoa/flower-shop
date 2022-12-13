@@ -19,6 +19,7 @@ const config = {
       fire: path.resolve(ROOT_PATH, './src/firebase'),
       errorMessages: path.resolve(ROOT_PATH, './src/errorMessages'),
       admins: path.resolve(ROOT_PATH, './src/adminsUID'),
+      orderStatuses: path.resolve(ROOT_PATH, './src/orderStatuses'),
     },
   },
   entry: {

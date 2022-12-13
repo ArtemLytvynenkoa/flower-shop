@@ -75,6 +75,9 @@
         ], [
           "admins",
           "./src/adminsUID"
+        ], [
+          "orderStatuses",
+          "./src/orderStatuses"
         ]],
         "extensions": [
           ".js",
