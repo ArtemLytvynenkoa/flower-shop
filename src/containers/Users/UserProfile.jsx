@@ -12,7 +12,7 @@ import errorMessages from 'errorMessages';
 import {
   auth,
   updateUser,
-  getUsserRef,
+  getUserRef,
 } from 'fire';
 import React, {
   useEffect,
@@ -42,7 +42,7 @@ const UserProfile = () => {
   const { userId } = useParams();
 
   const [value, loading, error] = useDocument(
-    getUsserRef(userId),
+    getUserRef(userId),
   );
 
   const userData = value?.data();

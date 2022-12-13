@@ -39,7 +39,7 @@ export const getBasketRef = uid => collection(db, `users/${uid}/basket`);
 export const getOrderRef = uid => collection(db, `users/${uid}/orders`);
 export const getBasketGoodRef = (uid, goodId) => doc(db, `users/${uid}/basket`, goodId);
 export const getGoodRef = goodId => doc(getFirestore(app), 'goods', goodId);
-export const getUsserRef = userId => doc(getFirestore(app), 'users', userId);
+export const getUserRef = userId => doc(getFirestore(app), 'users', userId);
 
 export const setUser = async data => {
   await setDoc(doc(usersRef, data.uid), data);

@@ -12,7 +12,7 @@ import {
   createOrder,
   deleteGoodFromUsersBasket,
   auth,
-  getUsserRef,
+  getUserRef,
 } from 'fire';
 import { useForm } from 'antd/lib/form/Form';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +25,7 @@ const OrderCreationForm = ({ basket }) => {
   const [user, isLoading] = useAuthState(auth);
 
   const [value, loading, error] = useDocument(
-    getUsserRef(user.uid),
+    getUserRef(user.uid),
   );
 
   const [form] = useForm();
