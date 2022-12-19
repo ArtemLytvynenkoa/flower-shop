@@ -50,7 +50,7 @@ const OrdersTable = () => {
           width: 165,
           render: value => (
             <div>
-              { moment(Number(value)).format('DD/MM/YYYY') }
+              { moment(value).format('DD/MM/YYYY') }
             </div>
           ),
         }, {

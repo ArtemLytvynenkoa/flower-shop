@@ -69,7 +69,8 @@ const OrderCreationForm = ({ basket }) => {
           ] }
           onSubmit={ async values => {
             try {
-              const orderCreationDate = new Date().getTime().toString();
+              const orderCreationDate = Date.now();
+
               const orderId = `${user.uid}-${values.orderPrice}-${orderCreationDate}`;
 
               await createUserOrder(
